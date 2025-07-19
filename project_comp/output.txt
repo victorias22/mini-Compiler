@@ -1,0 +1,8 @@
+function foo(): int{
+  int y: 4;
+}
+
+function main(): void{
+  int x: 3;
+  x = foo;
+}
