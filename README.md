@@ -1,50 +1,51 @@
-# Mini Compiler with LEX & YACC
+# 🧠 Mini Compiler with LEX & YACC
 
-פרויקט קומפיילר קטן בשפת C, שנבנה באמצעות הכלים **LEX** (או FLEX) ו־**YACC** (או Bison), שמטרתו לבדוק קוד בשפה פשוטה בסגנון C, לזהות שגיאות תחביר או לאשר שהקוד תקין.
-
----
-
-## 🧠 מה הפרויקט עושה?
-
-המערכת מקבלת קובץ קוד (`output.txt`) בשפה דמוית־C (פסאודו-קוד), ובודקת אם התחביר שלו תקין.
-
-- אם הקוד תקין → תודפס הודעה: ✅ `It's Works!`
-- אם יש שגיאה בתחביר → תודפס הודעת שגיאה ❌ עם מספר שורה
+A simple compiler project built in C using **LEX** (or FLEX) and **YACC** (or Bison), designed to parse and validate code written in a simplified, C-like language.
 
 ---
 
-## 📂 מבנה הקבצים בפרויקט
+## ✅ What Does It Do?
 
-| קובץ          | תיאור                                                                 |
-|---------------|------------------------------------------------------------------------|
-| `lex.l`       | קובץ LEX – מגדיר אילו טוקנים קיימים בשפה (מילים שמורות, מזהים, מספרים ועוד). |
-| `project.y`   | קובץ YACC – מגדיר את תחביר השפה (דקדוק): איך מותר להרכיב פקודות חוקיות.     |
-| `y.tab.c`     | קובץ שנוצר אוטומטית מ־YACC – מכיל את קוד הפארסר.                             |
-| `y.tab.h`     | קובץ כותרת אוטומטי – מגדיר את כל הטוקנים כמקרואים בקוד.                      |
-| `lex.yy.c`    | קובץ שנוצר אוטומטית מ־LEX – מכיל את קוד הסורק (lexer).                        |
-| `output.txt`  | קובץ קלט – מכיל קוד לבדיקה (תוכנית בשפה שלך).                                |
-| `comp`        | הקובץ המבוצע של הקומפיילר – נוצר לאחר קומפילציה.                             |
+This compiler reads a source file (`output.txt`) written in pseudo-C and checks its **syntax validity**.
+
+- If the code is **valid**:  
+
+
+- If there's a **syntax error**:  
+
 
 ---
 
-## 🛠️ איך מריצים את הפרויקט?
+## 📂 File Structure
 
-### 🔧 קומפילציה:
+| File         | Description |
+|--------------|-------------|
+| `lex.l`      | LEX file — defines the lexical tokens (keywords, identifiers, numbers, etc.) |
+| `project.y`  | YACC file — defines the grammar and syntax rules of the pseudo-language |
+| `y.tab.c`    | Auto-generated parser C file from YACC |
+| `y.tab.h`    | Auto-generated header file defining tokens as macros |
+| `lex.yy.c`   | Auto-generated scanner from LEX |
+| `output.txt` | Input file — contains the code to be checked |
+| `comp`       | Final compiled binary of the compiler |
+
+---
+
+## 🛠️ How to Build & Run
+
+### 🧱 Compilation
 
 ```bash
 flex lex.l
 bison -d project.y
 gcc lex.yy.c y.tab.c -o comp
 
-
 ./comp < output.txt
-
 
 int x = 3;
 
 if (x > 2) {
     x = x + 1;
 }
+✅ It's Works!
 
 
-It's Works!
